@@ -1,0 +1,11 @@
+<form #loginForm="ngForm" (ngSubmit)="login()">
+    <mat-form-field>
+      <input matInput placeholder="Nome" [(ngModel)]="formData.name" name="name" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="formData.email" name="email" required email>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Invia</button>
+</form>
