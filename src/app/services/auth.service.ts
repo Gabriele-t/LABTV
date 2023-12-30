@@ -18,5 +18,4 @@ export class AuthService {
   register(model: RegisterDto): Observable<LoggedUser> {
     return this.http.post<LoggedUser>(`${environment.JSON_SERVER_BASE_URL}/register`, model)
   }
-
 }
