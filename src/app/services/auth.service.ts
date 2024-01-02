@@ -18,4 +18,19 @@ export class AuthService {
   register(model: RegisterDto): Observable<LoggedUser> {
     return this.http.post<LoggedUser>(`${environment.JSON_SERVER_BASE_URL}/register`, model)
   }
+
+  setLoggedUser(user: LoggedUser) {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  getLoggedUser(): LoggedUser | null {
+    let userStorage = localStorage.getItem('user')
+
+    if (userStorage !== null) {
+      let user: LoggedUser = JSON.parse(userStorage)
+      return user
+    }
+
+    return null
+  }
 }

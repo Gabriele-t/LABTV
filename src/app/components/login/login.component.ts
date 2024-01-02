@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginDto } from 'src/app/models/auth';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,10 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   model = new LoginDto
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.authService.login(this.model)
-    .subscribe(loggedUser => console.log(loggedUser));
+    .subscribe(loggedUser => {
+      this.authService.setLoggedUser(loggedUser)
+      this.router.navigate([''])
+    })
   }
 }
