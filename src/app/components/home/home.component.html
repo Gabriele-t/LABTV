@@ -1,2 +1,1 @@
-<span *ngFor="let movie of movieList.results">1</span>
-<img src={{movie.backdrop_path}} alt="" *ngFor="let movie of movieList.results">
+<img src='https://image.tmdb.org/t/p/w500{{movie.poster_path}}' alt={{movie.title}} *ngFor="let movie of movieList.results">
