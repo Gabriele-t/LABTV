@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatSliderModule } from '@angular/material/slider'
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -36,7 +36,7 @@ import { HomeComponent } from './components/home/home.component';
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-    MatSliderModule
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
