@@ -9,8 +9,15 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  public movieList = new MovieList
-  public imgSrc = environment.imgSrc
+  movieList = new MovieList
+  imgSrc = environment.imgSrc
+  slickConfig = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: true,
+    infinite: true,
+  };
 
   constructor(private movieService: MovieService) {
     this.movieService.get().subscribe(movieList => {

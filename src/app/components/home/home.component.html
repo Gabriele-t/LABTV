@@ -1,5 +1,5 @@
-<ngx-slick-carousel>
-    <div *ngFor="let movie of movieList.results">
-      <img [src]="imgSrc + movie.poster_path" alt="{{ movie.title }}">
-    </div>
+<ngx-slick-carousel [config]="slickConfig">
+  <div *ngFor="let movie of movieList.results">
+    <img [src]="imgSrc + movie.poster_path" alt="{{ movie.title }}">
+  </div>
 </ngx-slick-carousel>
