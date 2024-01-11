@@ -1,4 +1,12 @@
+ngx-slick-carousel {
+    width: 93%;
+    margin: 1% auto;
+}
+
 img {
-    width: 100%;
-    height: fit-content;
+    width: 90%;
+    height: 35vw;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 10px;
 }
