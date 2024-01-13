@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MovieList } from '../models/movie.model';
 import { environment } from 'src/environments/environment';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,11 @@ export class MovieService {
       api_key: this.apiKey,
       query: query
     };
-    return this.http.get(environment.search, { params });
+    return this.http.get<MovieList>(environment.search, { params }).pipe(
+      catchError(error => {
+        console.error('Errore durante la ricerca dei film:', error);
+        throw error;
+      })
+    );
   }
 }
