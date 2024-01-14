@@ -13,17 +13,11 @@ export class SearchComponent {
 
   constructor(private movieService: MovieService) {}
 
-  movieSearch(): void {
+  movieSearch() {
     if (this.keyword.trim() !== '') {
       this.movieService.search(this.keyword).subscribe(
         (data: MovieList) => {
           this.searchResults = data.results;
-        },
-        (error) => {
-          // Gestisci l'errore come preferisci
-        },
-        () => {
-          // Puoi gestire il completamento se necessario
         }
       );
     } else {
