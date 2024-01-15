@@ -1,7 +1,23 @@
+:host {
+    position: relative;
+}
+
 input {
     padding: 10px;
     border-radius: 10px;
     border: black solid 1px;
     background-color: transparent;
     color: white;
+}
+
+div {
+    position: absolute;
+    z-index: 1;
+    background-color: gray;
+    border-radius: 10px;
+    margin-top: 10%;
+    width: 100%;
+    text-wrap: balance;
+    max-height: 80vh;
+    overflow-y: auto;
 }

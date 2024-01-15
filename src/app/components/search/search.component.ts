@@ -16,8 +16,9 @@ export class SearchComponent {
   movieSearch() {
     if (this.keyword.trim() !== '') {
       this.movieService.search(this.keyword).subscribe(
-        (data: MovieList) => {
+        (data) => {
           this.searchResults = data.results;
+          console.log(data);
         }
       );
     } else {
