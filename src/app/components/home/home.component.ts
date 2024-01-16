@@ -19,7 +19,7 @@ export class HomeComponent {
   };
 
   constructor(private movieService: MovieService) {
-    this.movieService.get().subscribe(movieList => {
+    this.movieService.getPopularMovies().subscribe(movieList => {
       this.movieList = movieList
       console.log(this.movieList)
     })
