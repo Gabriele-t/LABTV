@@ -1,14 +1,8 @@
-<input
-    type="text" 
-    id="searchInput" 
-    [(ngModel)]="keyword" 
-    (input)="movieSearch()" 
-    placeholder="Cerca film"
-/>
+<input type="text" id="searchInput" [(ngModel)]="keyword" (input)="movieSearch()" placeholder="Cerca film" />
 <div *ngIf="searchResults.length > 0">
-    <ul>
-      <li *ngFor="let movie of searchResults">
-        {{ movie.title }}
-      </li>
-    </ul>
-</div>  
+  <ul>
+    <li *ngFor="let movie of searchResults">
+      {{ movie.title }}
+    </li>
+  </ul>
+</div>

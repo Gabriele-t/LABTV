@@ -1,3 +1,5 @@
+<app-main-carousel></app-main-carousel>
+
 <ngx-slick-carousel [config]="slickConfig">
   <div *ngFor="let movie of movieList.results" ngxSlickItem>
     <img [src]="imgSrc + movie.poster_path" alt="{{ movie.title }}" [routerLink]="['/movie', movie.id]">

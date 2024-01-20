@@ -5,17 +5,17 @@ import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-main-carousel',
+  templateUrl: './main-carousel.component.html',
+  styleUrl: './main-carousel.component.css'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class MainCarouselComponent implements OnInit, OnDestroy {
   movieList: MovieList = new MovieList();
   imgSrc = environment.imgSrc;
   slickConfig = {
-    slidesToShow: 4,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    infinite: false,
+    infinite: false
   };
   private movieListSubscription: Subscription = new Subscription();
 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private fetchPopularMovies() {
-    this.movieListSubscription = this.movieService.getPopularMovies().subscribe({
+    this.movieListSubscription = this.movieService.getPopularMovies(true).subscribe({
       next: (movieList: MovieList) => {
         if (movieList) {
           this.movieList = movieList;

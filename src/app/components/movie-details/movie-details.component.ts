@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DetailedMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -9,8 +10,7 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movieId: number = 0;
-
-  movieDetails: any;
+  movieDetails: DetailedMovie = {} as DetailedMovie;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) {}
 

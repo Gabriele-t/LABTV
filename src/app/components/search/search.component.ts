@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Movie, MovieList } from 'src/app/models/movie.model';
+import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  searchResults: Movie[] = [];
+  searchResults: SimpleMovie[] = [];
   keyword: string = '';
 
   constructor(private movieService: MovieService) {}
@@ -18,7 +18,6 @@ export class SearchComponent {
       this.movieService.search(this.keyword).subscribe(
         (data) => {
           this.searchResults = data.results;
-          console.log(data);
         }
       );
     } else {

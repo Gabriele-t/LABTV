@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MovieList } from '../models/movie.model';
+import { DetailedMovie, MovieList, SimpleMovie } from '../models/movie.model';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,19 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getPopularMovies() {
+  getPopularMovies(slice: boolean = false) {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
-      .set('language', 'it');
+      .set('language', 'it')
 
-    return this.http.get<MovieList>(environment.popularMovies, { params });
+    return this.http.get<MovieList>(environment.popularMovies, { params }).pipe(
+      map((response) => {
+        if (slice) {
+          response.results = response.results.slice(0, 4)
+        }
+        return response
+      })
+    )
   }
 
   search(query: string) {
@@ -35,6 +43,6 @@ export class MovieService {
 
     const url = `${environment.movieDetails}/${movieId}`;
 
-    return this.http.get<any>(url, { params });
+    return this.http.get<DetailedMovie>(url, { params });
   }
 }

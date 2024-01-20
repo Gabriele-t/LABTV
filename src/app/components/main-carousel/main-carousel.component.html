@@ -1,0 +1,4 @@
+<ngx-slick-carousel [config]="slickConfig">
+    <div *ngFor="let movie of movieList.results" ngxSlickItem [ngStyle]="{'background-image': 'url(' + imgSrc + movie.backdrop_path + ')'}">
+    </div>
+</ngx-slick-carousel>

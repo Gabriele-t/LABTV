@@ -2,17 +2,31 @@
 
 * {
     box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-}
-
-body {
+    text-decoration: none;
+    color: white;
     margin: 0;
-    font-family: 'Open Sans', sans-serif;
+    --mainFont: 'Open Sans', sans-serif;
+    font-family: var(--mainFont);
 }
 
-button.slick-arrow::before {
-    color: black;
+
+.slick-arrow {
+    --arrow-gap: 2%;
+}
+
+.slick-arrow.slick-prev {
+    left: var(--arrow-gap);
+    z-index: 1;
+}
+
+.slick-arrow.slick-next {
+    right: var(--arrow-gap);
+}
+
+.slick-arrow:not(:hover) {
+    opacity: 0.4;
+}
+
+.slick-arrow.slick-disabled {
+    display: none !important;
 }
