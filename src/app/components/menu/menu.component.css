@@ -6,10 +6,15 @@
 
 mat-toolbar {
     --mat-toolbar-title-text-font: 'Open Sans', sans-serif;
+    --mat-toolbar-title-text-weight: 1000;
 
     background: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
     padding: 20px 16px;
     height: 90px;
+}
+
+mat-toolbar h1 {
+    --mat-toolbar-title-text-size: 30px;
 }
 
 img {

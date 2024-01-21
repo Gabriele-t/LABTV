@@ -1,4 +1,8 @@
 div {
     height: 40vw;
     background-size: cover;
+    padding-top: 90px;
+}
+
+.slick-current {
 }
