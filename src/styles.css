@@ -1,17 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-
-* {
-    box-sizing: border-box;
-    text-decoration: none;
-    color: white;
+body {
     margin: 0;
-    --mainFont: 'Open Sans', sans-serif;
-    font-family: var(--mainFont);
+}
+
+a {
+    text-decoration: none;
 }
 
 
 .slick-arrow {
     --arrow-gap: 2%;
+}
+
+.slick-arrow:not(:hover) {
+    opacity: 0.4;
 }
 
 .slick-arrow.slick-prev {
@@ -21,10 +22,6 @@
 
 .slick-arrow.slick-next {
     right: var(--arrow-gap);
-}
-
-.slick-arrow:not(:hover) {
-    opacity: 0.4;
 }
 
 .slick-arrow.slick-disabled {

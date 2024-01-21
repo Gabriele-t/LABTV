@@ -4,7 +4,9 @@
     width: 100%;
 }
 
-.mat-toolbar {
+mat-toolbar {
+    --mat-toolbar-title-text-font: 'Open Sans', sans-serif;
+
     background: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
     padding: 20px 16px;
     height: 90px;
@@ -13,4 +15,8 @@
 img {
     height: 100%;
     transform: translateY(-8%);
+}
+
+a {
+    color: white;
 }
