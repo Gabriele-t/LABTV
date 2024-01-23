@@ -1,8 +1,14 @@
 <mat-toolbar color="primary">
-    <img src="../../../assets/logo1.png" alt="LABTV logo">
-    <h1>LABTV</h1>
+    <div>
+        <img src="../../../assets/logo1.png" alt="LABTV logo">
+        <h1>LABTV</h1>
+    </div>
+
     <a routerLink=''>Home</a>
-    <a routerLink="/register">Registrazione</a>
-    <a routerLink="/login">Entra</a>
-    <app-search></app-search>
+    <!-- <a routerLink="/register">Registrazione</a> -->
+    
+    <div>
+        <app-search></app-search>
+        <a routerLink="/login">Accedi</a>
+    </div>
 </mat-toolbar>

@@ -1,5 +1,9 @@
+h1 {
+    margin-left: 2%;
+}
+
 ngx-slick-carousel {
-    margin: 1% auto;
+    margin: 0 auto;
 }
 
 img {

@@ -1,6 +1,22 @@
 div {
-    height: 40vw;
     background-size: cover;
-    padding-top: 90px;
+}
+
+div div {
+    background: linear-gradient(to top, var(--backgroundColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    padding: 90px var(--leftRightPadding);
     box-sizing: border-box;
+    height: 40vw;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }

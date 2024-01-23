@@ -1,3 +1,10 @@
-* {
+:host {
+    --leftRightPadding: 5%;
+
+    --primaryColor: #f3743b;
+    --secondaryColor: #d71a75;
+    
     box-sizing: border-box;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
 }

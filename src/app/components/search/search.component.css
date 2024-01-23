@@ -5,9 +5,29 @@
 input {
     padding: 10px;
     border-radius: 10px;
-    border: black solid 1px;
+    border: white solid 2px;
     background-color: transparent;
     color: white;
+    transition: 0.1s;
+    width: 20vw;
+    box-sizing: border-box;
+    font-size: 19px;
+    font-weight: 500;
+    height: 100%;
+}
+
+input:hover {
+    border: 5px solid white;
+}
+
+:focus-visible {
+    outline: 0;
+    border: 5px solid white;
+}
+
+::placeholder {
+    color: white;
+    text-align: center;
 }
 
 div {
