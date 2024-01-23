@@ -1,0 +1,13 @@
+form {
+    padding: var(--menuHeight);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+button {
+    background: linear-gradient(to left bottom, var(--primaryColor), var(--secondaryColor));
+    color: white;
+}

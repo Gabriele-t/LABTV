@@ -4,9 +4,22 @@ div {
 
 div div {
     background: linear-gradient(to top, var(--backgroundColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
-    padding: 90px var(--leftRightPadding);
+}
+
+div div div {
+    background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    padding: var(--menuHeight) var(--leftRightPadding);
     box-sizing: border-box;
     height: 40vw;
+}
+
+p {
+    background: linear-gradient(to bottom left, var(--primaryColor), var(--secondaryColor));
+    line-height: 16px;
+    display: inline-block;
+    background-clip: text;
+    color: transparent;
+    font-weight: 1000;
 }
 
 h1 {

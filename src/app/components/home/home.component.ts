@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MovieList } from 'src/app/models/movie.model';
+import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  movieList: MovieList = new MovieList();
+  movieList = new Array<SimpleMovie>;
   imgSrc = environment.imgSrc;
   slickConfig = {
     slidesToShow: 4,
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private fetchPopularMovies() {
     this.movieListSubscription = this.movieService.getPopularMovies().subscribe({
-      next: (movieList: MovieList) => {
+      next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;
         } else {

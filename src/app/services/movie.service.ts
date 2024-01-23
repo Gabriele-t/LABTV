@@ -13,34 +13,42 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   getPopularMovies(slice: boolean = false) {
-    const params = new HttpParams()
+    const genreParams = new HttpParams()
       .set('api_key', this.apiKey)
-      .set('language', 'it-IT')
+      .set('language', 'it-IT');
 
-      return this.http.get(`${environment.apiUrl}/genre/movie/list`, { params }).pipe(
-        switchMap(genreData => {
-          const genreIds = (genreData as any).genres.map((genre: any) => genre.id)
+    return this.http.get(`${environment.apiUrl}/genre/movie/list`, { params: genreParams }).pipe(
+      switchMap(genreData => {
+        const movieParams = new HttpParams()
+          .set('api_key', this.apiKey)
+          .set('language', 'it-IT');
 
-          return this.http.get(`${environment.apiUrl}/movie/popular`, { params }).pipe(
-            map((response: any) => {
-              return response.results.map((movie: SimpleMovie)  => {
-                return { ...movie, genre: this.getGenreNames(movie.genre_ids, genreData) };
-              })
-            })
-          )
-        })
-      )
+        return this.http.get(`${environment.apiUrl}/movie/popular`, { params: movieParams }).pipe(
+          map((response: any) => {
+            const movies = response.results.map((movie: SimpleMovie) => {
+              return { ...movie, genre: this.getGenreNames(movie.genre_ids, genreData) };
+            });
 
-    // return this.http.get<MovieList>(`${environment.apiUrl}/movie/popular`, { params }).pipe(
-    //   map((response) => {
-    //     if (slice) {
-    //       response.results = response.results.slice(0, 4)
-    //     }
+            if (slice) {
+              return movies.slice(0, 4);
+            }
 
-    //     return response
-    //   })
-    // )
+            return movies;
+          })
+        );
+      })
+    )
   }
+
+  // return this.http.get<MovieList>(`${environment.apiUrl}/movie/popular`, { params }).pipe(
+  //   map((response) => {
+  //     if (slice) {
+  //       response.results = response.results.slice(0, 4)
+  //     }
+
+  //     return response
+  //   })
+  // )
 
   private getGenreNames(genreIds: number[], genreData: any): string {
     const genreMap: Record<number, string> = {};

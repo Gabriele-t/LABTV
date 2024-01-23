@@ -1,12 +1,14 @@
 <ngx-slick-carousel [config]="slickConfig">
-    <div *ngFor="let movie of movieList.results" ngxSlickItem
+    <div *ngFor="let movie of movieList" ngxSlickItem
         [ngStyle]="{'background-image': 'url(' + imgSrc + movie.backdrop_path + ')'}">
-        <div class="gradient">
-            <!-- <p>Genere: {{movie.genre}}</p> -->
-            <h1>{{movie.title}}</h1>
-            <span class="material-symbols-outlined">
-                star
-            </span>
+        <div>
+            <div>
+                <p>{{movie.genre}}</p>
+                <h1>{{movie.title}}</h1>
+                <span class="material-symbols-outlined">
+                    star
+                </span>
+            </div>
         </div>
     </div>
 </ngx-slick-carousel>

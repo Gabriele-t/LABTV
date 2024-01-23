@@ -1,4 +1,5 @@
 :host {
+    --menuHeight: 90px;
     --leftRightPadding: 5%;
 
     --primaryColor: #f3743b;
