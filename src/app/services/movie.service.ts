@@ -40,16 +40,6 @@ export class MovieService {
     )
   }
 
-  // return this.http.get<MovieList>(`${environment.apiUrl}/movie/popular`, { params }).pipe(
-  //   map((response) => {
-  //     if (slice) {
-  //       response.results = response.results.slice(0, 4)
-  //     }
-
-  //     return response
-  //   })
-  // )
-
   private getGenreNames(genreIds: number[], genreData: any): string {
     const genreMap: Record<number, string> = {};
 
@@ -78,5 +68,14 @@ export class MovieService {
     const url = `${environment.apiUrl}/movie/${movieId}`;
 
     return this.http.get<DetailedMovie>(url, { params });
+  }
+
+  getMovieVideos(movieId: number) {
+    const params = new HttpParams()
+      .set('api_key', this.apiKey)
+      .set('language', 'it');
+
+    const url = `${environment.apiUrl}/movie/${movieId}/videos`;
+    return this.http.get(url, { params });
   }
 }
