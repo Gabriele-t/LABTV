@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoggedUser, LoginDto, RegisterDto } from '../models/auth.model';
@@ -32,5 +32,14 @@ export class AuthService {
     }
 
     return null
+  }
+
+  purchase(userId: number, movieId: number, accessToken: string) {
+    const data = { userId, movieId };
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, data, {
+      // headers
+    });
   }
 }

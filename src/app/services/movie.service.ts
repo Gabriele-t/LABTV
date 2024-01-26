@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DetailedMovie, MovieList, SimpleMovie } from '../models/movie.model';
+import { DetailedMovie, MovieList, SimpleMovie, VideoResponse } from '../models/movie.model';
 import { environment } from 'src/environments/environment';
 import { map, switchMap } from 'rxjs';
 
@@ -40,7 +40,7 @@ export class MovieService {
     )
   }
 
-  private getGenreNames(genreIds: number[], genreData: any): string {
+  getGenreNames(genreIds: number[], genreData: any): string {
     const genreMap: Record<number, string> = {};
 
     genreData.genres.forEach((genre: any) => {
@@ -70,12 +70,16 @@ export class MovieService {
     return this.http.get<DetailedMovie>(url, { params });
   }
 
-  getMovieVideos(movieId: number) {
+  getMovieVideo(movieId: number) {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
-      .set('language', 'it');
+      .set('language', 'it')
+      .set('type', 'Trailer');
 
     const url = `${environment.apiUrl}/movie/${movieId}/videos`;
-    return this.http.get(url, { params });
+
+    return this.http.get<VideoResponse>(url, { params }).pipe(
+      map(response => response.results[0])
+    );
   }
 }

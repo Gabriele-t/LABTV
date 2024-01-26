@@ -73,3 +73,21 @@ export type SpokenLanguage = {
   iso_639_1: string;
   name: string;
 };
+
+export type VideoResponse = {
+  id: number;
+  results: Video[];
+}
+
+export class Video {
+  iso_639_1: string = '';
+  iso_3166_1: string = '';
+  name: string = '';
+  key: string = '';
+  site: string = '';
+  size: number = 0;
+  type: string = '';
+  official: boolean = false;
+  published_at: string = '';
+  id: string = '';
+}

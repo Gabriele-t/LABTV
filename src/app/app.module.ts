@@ -19,7 +19,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MainCarouselComponent } from './components/main-carousel/main-carousel.component';
-import { MatVideoModule } from 'mat-video';
+
+import { SafeUrlPipe } from './components/movie-details/pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { MatVideoModule } from 'mat-video';
     HomeComponent,
     SearchComponent,
     MovieDetailsComponent,
-    MainCarouselComponent
+    MainCarouselComponent,
+
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,
