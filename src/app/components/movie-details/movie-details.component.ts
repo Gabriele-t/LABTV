@@ -16,7 +16,7 @@ export class MovieDetailsComponent implements OnInit {
   movieVideo = new Video;
   loggedUser: LoggedUser | null = null;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService) {}
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -36,16 +36,15 @@ export class MovieDetailsComponent implements OnInit {
 
   purchase() {
     if (this.movieId !== 0 && this.loggedUser) {
-      // Effettua la chiamata al servizio di acquisto con l'id del film e le informazioni dell'utente
       this.authService.purchase(this.loggedUser.user.id, this.movieId, this.loggedUser.accessToken)
-        .subscribe(
-          response => {
+        .subscribe({
+          next: (response) => {
             alert('Acquisto completato con successo!');
           },
-          error => {
+          error: (error) => {
             alert('Errore durante l\'acquisto. Riprova.');
           }
-        );
+        });
     } else {
       alert('Errore durante l\'acquisto. Riprova.');
     }

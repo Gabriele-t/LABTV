@@ -38,8 +38,6 @@ export class AuthService {
     const data = { userId, movieId };
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
 
-    return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, data, {
-      // headers
-    });
+    return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, data);
   }
 }

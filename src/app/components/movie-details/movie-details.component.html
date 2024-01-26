@@ -2,5 +2,5 @@
     <h1>{{ movieDetails.title }}</h1>
     <p>{{ movieDetails.overview }}</p>
     <iframe width="560" height="315" [src]="'https://www.youtube.com/embed/' + movieVideo.key | safeUrl" frameborder="0" allowfullscreen></iframe>
-    <button type="button">Acquista</button>
+    <button type="button" (click)="purchase()">Acquista</button>
 </div>
