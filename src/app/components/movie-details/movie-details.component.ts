@@ -53,7 +53,7 @@ export class MovieDetailsComponent implements OnInit {
 
       this.authService.purchase(userId, this.movieId)
         .subscribe({
-          next: (response) => this.handlePurchaseSuccess(response),
+          next: (response) => this.handlePurchaseResponse(response),
           error: (error) => this.handlePurchaseError(error)
         });
     } else {
@@ -61,15 +61,23 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
-  private handlePurchaseSuccess(response: Observable<object>) {
-    alert('Acquisto completato con successo!');
-    console.log(response);
+  private handlePurchaseResponse(response: Observable<object>) {
     response.subscribe({
-      next: (response) => console.log(response) 
-    })
+      next: (responseData) => {
+        console.log(responseData);
+        alert('Acquisto completato con successo!');
+      },
+      error: (error) => {
+        if (error instanceof Error && error.message === 'Il film è già stato acquistato.') {
+          console.warn('Errore già gestito dal servizio:', error.message);
+        } else {
+          this.handlePurchaseError(error);
+        }
+      }
+    });
   }
-
-  private handlePurchaseError(error: any) {
+    
+  private handlePurchaseError(error: Error) {
     alert('Errore durante l\'acquisto. Riprova.');
     console.error('Dettagli dell\'errore:', error);
   }

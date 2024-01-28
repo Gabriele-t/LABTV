@@ -34,12 +34,6 @@ export class AuthService {
     return null
   }
 
-  isMovieAlreadyPurchased(userId: number, movieId: number): Observable<boolean> {
-    return this.http.get<boolean>(
-      `${environment.JSON_SERVER_BASE_URL}/purchases/check?userId=${userId}&movieId=${movieId}`
-    );
-  }
-
   purchase(userId: number, movieId: number) {
     return this.getAllPurchases()
       .pipe(
