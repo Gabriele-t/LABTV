@@ -27,9 +27,15 @@ h1 {
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+@media only screen and (max-width: 940px) {
+    div div div {
+        height: auto;
+    }
 }
