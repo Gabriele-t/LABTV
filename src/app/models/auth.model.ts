@@ -23,3 +23,9 @@ export type LoggedUser = {
     accessToken: string,
     user: User
 }
+
+export type Purchase = {
+    userId: number,
+    movieId: number,
+    id: number
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { LoggedUser } from 'src/app/models/auth.model';
 import { DetailedMovie, Video } from 'src/app/models/movie.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -35,18 +36,45 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   purchase() {
-    if (this.movieId !== 0 && this.loggedUser) {
-      this.authService.purchase(this.loggedUser.user.id, this.movieId, this.loggedUser.accessToken)
+    if (this.canPurchase()) {
+      this.handlePurchase();
+    } else {
+      this.showPurchaseError();
+    }
+  }
+
+  private canPurchase(): boolean {
+    return this.movieId !== 0 && this.loggedUser !== null && this.loggedUser !== undefined;
+  }
+
+  private handlePurchase() {
+    if (this.loggedUser !== null && this.loggedUser !== undefined) {
+      const userId = this.loggedUser.user.id;
+
+      this.authService.purchase(userId, this.movieId)
         .subscribe({
-          next: (response) => {
-            alert('Acquisto completato con successo!');
-          },
-          error: (error) => {
-            alert('Errore durante l\'acquisto. Riprova.');
-          }
+          next: (response) => this.handlePurchaseSuccess(response),
+          error: (error) => this.handlePurchaseError(error)
         });
     } else {
-      alert('Errore durante l\'acquisto. Riprova.');
+      this.showPurchaseError();
     }
+  }
+
+  private handlePurchaseSuccess(response: Observable<object>) {
+    alert('Acquisto completato con successo!');
+    console.log(response);
+    response.subscribe({
+      next: (response) => console.log(response) 
+    })
+  }
+
+  private handlePurchaseError(error: any) {
+    alert('Errore durante l\'acquisto. Riprova.');
+    console.error('Dettagli dell\'errore:', error);
+  }
+
+  private showPurchaseError() {
+    alert('Errore durante l\'acquisto. Riprova.');
   }
 }
