@@ -1,5 +1,5 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { LoginDto } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,13 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   model = new LoginDto
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private location: Location) {}
 
   login() {
     this.authService.login(this.model)
     .subscribe(loggedUser => {
       this.authService.setLoggedUser(loggedUser)
-      this.router.navigate([''])
+      this.location.back(); 
     })
   }
 }

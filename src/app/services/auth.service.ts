@@ -34,22 +34,14 @@ export class AuthService {
     return null
   }
 
-  purchase(userId: number, movieId: number) {
-    return this.getAllPurchases()
-      .pipe(
-        map((purchases) => {
-          const isAlreadyPurchased = purchases.some((purchase) => purchase.userId === userId && purchase.movieId === movieId);
-
-          if (isAlreadyPurchased) {            
-            return throwError(() => new Error('Il film è già stato acquistato.'));
-          }          
-
-          return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, { userId, movieId });
-        })
-      );
+  hasPurchasedMovie(userId: number, movieId: number): Observable<boolean> {
+    return this.http.get<[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`).pipe(
+      map(purchases => purchases.length > 0)
+    );
   }
 
-  private getAllPurchases() {
-    return this.http.get<Purchase[]>(`${environment.JSON_SERVER_BASE_URL}/purchases`);
+  purchase(userId: number, movieId: number) {
+    const purchaseData = { userId, movieId };
+    return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, purchaseData);
   }
 }

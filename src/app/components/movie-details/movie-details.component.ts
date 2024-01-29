@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoggedUser } from 'src/app/models/auth.model';
 import { DetailedMovie, Video } from 'src/app/models/movie.model';
@@ -15,9 +15,9 @@ export class MovieDetailsComponent implements OnInit {
   movieId: number = 0;
   movieDetails: DetailedMovie = {} as DetailedMovie;
   movieVideo = new Video;
-  loggedUser: LoggedUser | null = null;
+  showPurchaseButton: boolean = true;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -32,57 +32,36 @@ export class MovieDetailsComponent implements OnInit {
       this.movieVideo = movieVideo;
     });
 
-    this.loggedUser = this.authService.getLoggedUser();
-  }
+    const loggedUser = this.authService.getLoggedUser();
 
-  purchase() {
-    if (this.canPurchase()) {
-      this.handlePurchase();
-    } else {
-      this.showPurchaseError();
-    }
-  }
-
-  private canPurchase(): boolean {
-    return this.movieId !== 0 && this.loggedUser !== null && this.loggedUser !== undefined;
-  }
-
-  private handlePurchase() {
-    if (this.loggedUser !== null && this.loggedUser !== undefined) {
-      const userId = this.loggedUser.user.id;
-
-      this.authService.purchase(userId, this.movieId)
-        .subscribe({
-          next: (response) => this.handlePurchaseResponse(response),
-          error: (error) => this.handlePurchaseError(error)
-        });
-    } else {
-      this.showPurchaseError();
-    }
-  }
-
-  private handlePurchaseResponse(response: Observable<object>) {
-    response.subscribe({
-      next: (responseData) => {
-        console.log(responseData);
-        alert('Acquisto completato con successo!');
-      },
-      error: (error) => {
-        if (error instanceof Error && error.message === 'Il film è già stato acquistato.') {
-          console.warn('Errore già gestito dal servizio:', error.message);
-        } else {
-          this.handlePurchaseError(error);
+    if (loggedUser) {
+      this.authService.hasPurchasedMovie(loggedUser.user.id, this.movieId).subscribe(
+        (hasPurchased) => {
+          this.showPurchaseButton = !hasPurchased;
+        },
+        error => {
+          console.error('Errore durante la verifica dell\'acquisto:', error);
         }
-      }
-    });
-  }
-    
-  private handlePurchaseError(error: Error) {
-    alert('Errore durante l\'acquisto. Riprova.');
-    console.error('Dettagli dell\'errore:', error);
+      );
+    }
   }
 
-  private showPurchaseError() {
-    alert('Errore durante l\'acquisto. Riprova.');
+  purchaseMovie() {
+    const userId = this.authService.getLoggedUser()?.user.id;
+
+    if (userId) {
+      this.authService.purchase(userId, this.movieId).subscribe({
+        next: () => {
+          console.log('Acquisto effettuato con successo!');
+          this.showPurchaseButton = !this.showPurchaseButton
+        },
+        error: error => {
+          console.error('Errore durante l\'acquisto:', error);
+        }
+      });
+    } else {
+      console.log('Utente non autenticato. Effettuare l\'accesso per acquistare.');
+      this.router.navigate(['login'])
+    }
   }
 }
