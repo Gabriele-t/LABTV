@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -11,7 +11,7 @@ export class SearchComponent {
   searchResults: SimpleMovie[] = [];
   keyword: string = '';
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private el: ElementRef) { }
 
   movieSearch() {
     if (this.keyword.trim() !== '') {
@@ -23,5 +23,19 @@ export class SearchComponent {
     } else {
       this.searchResults = [];
     }
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent) {
+    const clickedInside = this.el.nativeElement.contains(event.target);
+    if (!clickedInside) {
+      this.searchResults = [];
+      this.keyword = ''
+    }
+  }
+
+  handleMovieClick() {
+    this.searchResults = [];
+    this.keyword = ''
   }
 }
