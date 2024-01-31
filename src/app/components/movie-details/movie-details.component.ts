@@ -47,21 +47,5 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   purchaseMovie() {
-    const userId = this.authService.getLoggedUser()?.user.id;
-
-    if (userId) {
-      this.authService.purchase(userId, this.movieId).subscribe({
-        next: () => {
-          console.log('Acquisto effettuato con successo!');
-          this.showPurchaseButton = !this.showPurchaseButton
-        },
-        error: error => {
-          console.error('Errore durante l\'acquisto:', error);
-        }
-      });
-    } else {
-      console.log('Utente non autenticato. Effettuare l\'accesso per acquistare.');
-      this.router.navigate(['login'])
-    }
   }
 }

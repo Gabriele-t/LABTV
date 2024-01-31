@@ -40,8 +40,19 @@ export class AuthService {
     );
   }
 
-  purchase(userId: number, movieId: number) {
-    const purchaseData = { userId, movieId };
-    return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, purchaseData);
+  purchase(movieId: number) {
+    const loggedUser = this.getLoggedUser();
+
+    if (loggedUser) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${loggedUser.accessToken}`);
+      const userId = loggedUser.user.id
+
+      const purchaseData = { userId, movieId };
+
+      return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, purchaseData, { headers });
+    } else {
+      console.error('Token di accesso non disponibile');
+      return new Observable();
+    }
   }
 }
