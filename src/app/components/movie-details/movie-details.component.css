@@ -1,3 +1,7 @@
 div {
     padding: var(--menuHeight) ;
 }
+
+iframe {
+    width: 100%;
+}

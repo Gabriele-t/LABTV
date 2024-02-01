@@ -47,5 +47,11 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   purchaseMovie() {
+    this.authService.purchase(this.movieId).subscribe({
+      next: () => { },
+      error: error => {
+        console.error('Errore durante l\'acquisto:', error);
+      }
+    });
   }
 }

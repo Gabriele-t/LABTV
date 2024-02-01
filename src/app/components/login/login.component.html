@@ -1,16 +1,22 @@
 <form #loginForm="ngForm" (ngSubmit)="login()">
-    <mat-form-field>
-      <mat-label>E-mail</mat-label>
-      <input matInput placeholder="E-mail..." [(ngModel)]="model.email" name="email" required type="email" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" #emailInput="ngModel">
-      <mat-error *ngIf="emailInput.hasError('required')">E-mail obbligatoria</mat-error>
-      <mat-error *ngIf="emailInput.hasError('pattern')">E-mail non valida</mat-error>
-    </mat-form-field>
+  <div *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
 
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Password..." [(ngModel)]="model.password" name="password" required type="password" #passwordInput="ngModel">
-      <mat-error *ngIf="passwordInput.hasError('required')">Password obbligatoria</mat-error>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input matInput placeholder="E-mail..." [(ngModel)]="model.email" name="email" required type="email"
+      pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" #emailInput="ngModel">
+    <mat-error *ngIf="emailInput.hasError('required')">E-mail obbligatoria</mat-error>
+    <mat-error *ngIf="emailInput.hasError('pattern')">E-mail non valida</mat-error>
+  </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Entra</button>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password..." [(ngModel)]="model.password" name="password" required type="password"
+      #passwordInput="ngModel">
+    <mat-error *ngIf="passwordInput.hasError('required')">Password obbligatoria</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Entra</button>
 </form>

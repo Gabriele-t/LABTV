@@ -1,10 +1,22 @@
-form {
-    padding: var(--menuHeight);
+:host {
     display: flex;
-    flex-direction: column;
+    padding: var(--menuHeight);
+    justify-content: center;
     height: 100vh;
     box-sizing: border-box;
+    min-height: 500px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     justify-content: center;
+    width: 300px;
+}
+
+div {
+    padding-bottom: 22px;
 }
 
 button {
