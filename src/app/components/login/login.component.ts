@@ -15,7 +15,6 @@ export class LoginComponent {
   
   constructor(private authService: AuthService, private location: Location, private activatedRoute: ActivatedRoute) { }
 
-  // All'interno del componente della pagina di login
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.errorMessage = params['message'];
