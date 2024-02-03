@@ -15,7 +15,7 @@ div div div {
 
 p {
     background: linear-gradient(to bottom left, var(--primaryColor), var(--secondaryColor));
-    line-height: 16px;
+    line-height: 20px;
     display: inline-block;
     background-clip: text;
     color: transparent;

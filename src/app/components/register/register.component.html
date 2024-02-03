@@ -1,0 +1,38 @@
+<form #registerForm="ngForm" (ngSubmit)="register()">
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="model.name" name="name" required #nameInput="ngModel">
+        <mat-error *ngIf="nameInput.hasError('required')">Nome obbligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="model.email" name="email" required type="email"
+            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">E-mail obbligatoria</mat-error>
+        <mat-error *ngIf="emailInput.hasError('pattern')">E-mail non valida</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="model.password" name="password" required type="password" #passwordInput="ngModel">
+        <mat-error *ngIf="passwordInput.hasError('required')">Password obbligatoria</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Conferma Password</mat-label>
+        <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" required type="password"
+            #confirmPasswordInput="ngModel">
+        <mat-error *ngIf="confirmPasswordInput.hasError('required')">Conferma Password obbligatoria</mat-error>
+        <mat-error *ngIf="confirmPasswordInput.hasError('passwordMismatch') && confirmPasswordInput.valid">
+            Le password non corrispondono
+        </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit"
+        [disabled]="registerForm.invalid || confirmPasswordInput.hasError('passwordMismatch')">Registrati</button>
+    <h3>
+        Hai già un account?
+        <a routerLink="/login">Accedi</a>
+    </h3>
+</form>

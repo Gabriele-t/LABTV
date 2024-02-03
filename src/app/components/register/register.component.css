@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    padding: var(--menuHeight) 0;
+    justify-content: center;
+    height: 100vh;
+    box-sizing: border-box;
+    min-height: 600px;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    width: 400px;
+}
+
+button {
+    background: linear-gradient(to left bottom, var(--primaryColor), var(--secondaryColor));
+    color: white;
+}
