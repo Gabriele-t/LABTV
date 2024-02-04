@@ -24,13 +24,13 @@
         <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" required type="password"
             #confirmPasswordInput="ngModel">
         <mat-error *ngIf="confirmPasswordInput.hasError('required')">Conferma Password obbligatoria</mat-error>
-        <mat-error *ngIf="confirmPasswordInput.hasError('passwordMismatch') && confirmPasswordInput.valid">
+        <mat-error *ngIf="model.password !== confirmPassword && confirmPasswordInput.valid">
             Le password non corrispondono
         </mat-error>
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit"
-        [disabled]="registerForm.invalid || confirmPasswordInput.hasError('passwordMismatch')">Registrati</button>
+        [disabled]="registerForm.invalid || model.password !== confirmPassword">Registrati</button>
     <h3>
         Hai già un account?
         <a routerLink="/login">Accedi</a>

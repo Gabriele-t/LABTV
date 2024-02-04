@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  model = new RegisterDto
-  confirmPassword = ''
+  model: RegisterDto = new RegisterDto();
+  confirmPassword = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -22,13 +22,4 @@ export class RegisterComponent {
       }
     });
   }
-
-export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  return password && confirmPassword && password.value !== confirmPassword.value
-    ? { 'passwordMismatch': true }
-    : null;
-}
 }
