@@ -15,15 +15,16 @@
 
     <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="model.password" name="password" required type="password" #passwordInput="ngModel">
+        <input matInput [(ngModel)]="model.password" name="password" required type="password" minlength="4" #passwordInput="ngModel">
         <mat-error *ngIf="passwordInput.hasError('required')">Password obbligatoria</mat-error>
+        <mat-error *ngIf="passwordInput.hasError('minlength')">La password deve contenere almeno 4 caratteri</mat-error>
     </mat-form-field>
-
+    
     <mat-form-field>
         <mat-label>Conferma Password</mat-label>
-        <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" required type="password"
-            #confirmPasswordInput="ngModel">
+        <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" required type="password" minlength="4" #confirmPasswordInput="ngModel">
         <mat-error *ngIf="confirmPasswordInput.hasError('required')">Conferma Password obbligatoria</mat-error>
+        <mat-error *ngIf="confirmPasswordInput.hasError('minlength')">La password deve contenere almeno 4 caratteri</mat-error>
         <mat-error *ngIf="model.password !== confirmPassword && confirmPasswordInput.valid">
             Le password non corrispondono
         </mat-error>
