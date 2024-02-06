@@ -66,6 +66,7 @@ export class AuthService {
         );
     } else {
       console.error('Token di accesso non disponibile');
+      this.redirectToLoginPage()
       return new Observable();
     }
   }
@@ -92,7 +93,7 @@ export class AuthService {
     }
   }
 
-  private redirectToLoginPage(message: string) {
+  private redirectToLoginPage(message?: string) {
     this.router.navigate(['/login'], { queryParams: { message: message } });
   }
 }
