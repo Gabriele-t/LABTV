@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoggedUser } from 'src/app/models/auth.model';
 import { DetailedMovie, Video } from 'src/app/models/movie.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovieService } from 'src/app/services/movie.service';
@@ -15,7 +13,7 @@ export class MovieDetailsComponent implements OnInit {
   movieId: number = 0;
   movieDetails: DetailedMovie = {} as DetailedMovie;
   movieVideo = new Video;
-  showPurchaseButton: boolean = true;
+  moviePurchased: boolean = false;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService, private router: Router) { }
 
@@ -34,14 +32,21 @@ export class MovieDetailsComponent implements OnInit {
       const loggedUser = this.authService.getLoggedUser();
 
       if (loggedUser) {
-        this.authService.hasPurchasedMovie(loggedUser.user.id, this.movieId).subscribe({
-          next: (hasPurchased) => {
-            this.showPurchaseButton = !hasPurchased;
-          },
-          error: error => {
-            console.error('Errore durante la verifica dell\'acquisto:', error);
-          }
-        });
+        if (this.authService.isTokenExpired(loggedUser.accessToken)) {
+          const errorMessage = 'Il token di accesso è scaduto. Effettua nuovamente l\'accesso.';
+          console.error(errorMessage);
+          this.authService.redirectToLoginPage(errorMessage);
+        }
+        else {
+          this.authService.hasPurchasedMovie(loggedUser.user.id, this.movieId).subscribe({
+            next: (hasPurchased) => {
+              this.moviePurchased = true;
+            },
+            error: error => {
+              console.error('Errore durante la verifica dell\'acquisto:', error);
+            }
+          });
+        }
       }
     });
   }
@@ -51,6 +56,17 @@ export class MovieDetailsComponent implements OnInit {
       next: () => { },
       error: error => {
         console.error('Errore durante l\'acquisto:', error);
+      }
+    });
+  }
+
+  returnMovie() {
+    this.authService.returnMovie(this.movieId).subscribe({
+      next: () => {
+        this.moviePurchased = false;
+      },
+      error: error => {
+        console.error('Errore durante la restituzione del film:', error);
       }
     });
   }

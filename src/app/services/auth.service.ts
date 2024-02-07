@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { Observable, catchError, map, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, map, mergeMap, of, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoggedUser, LoginDto, Purchase, RegisterDto } from '../models/auth.model';
 import { Router } from '@angular/router';
@@ -36,9 +36,25 @@ export class AuthService {
   }
 
   hasPurchasedMovie(userId: number, movieId: number): Observable<boolean> {
-    return this.http.get<[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`).pipe(
+    const authToken = this.getAuthToken();
+    if (!authToken) {
+      return of(false);
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+
+    return this.http.get<[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`, { headers }).pipe(      
       map(purchases => purchases.length > 0)
     );
+  }
+
+  private getAuthToken(): string | null {
+    let userStorage = localStorage.getItem('user');
+    if (userStorage !== null) {
+      let user: LoggedUser = JSON.parse(userStorage);
+      return user.accessToken;
+    }
+    return null;
   }
 
   purchase(movieId: number) {
@@ -71,7 +87,7 @@ export class AuthService {
     }
   }
 
-  private isTokenExpired(token: string): boolean {
+  isTokenExpired(token: string): boolean {
     if (!token) return true;
 
     const tokenData = this.decodeToken(token);
@@ -93,7 +109,40 @@ export class AuthService {
     }
   }
 
-  private redirectToLoginPage(message?: string) {
+  redirectToLoginPage(message?: string) {
     this.router.navigate(['/login'], { queryParams: { message: message } });
+  }
+
+  returnMovie(movieId: number): Observable<any> {
+    const loggedUser = this.getLoggedUser();
+    if (!loggedUser) {
+      console.error('Utente non autenticato');
+      return throwError('Utente non autenticato');
+    }
+
+    const userId = loggedUser.user.id;
+    const accessToken = loggedUser.accessToken;
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Errore durante il recupero dell\'acquisto:', error);
+          return throwError(error);
+        }),
+        mergeMap((purchase: any) => {
+          if (!purchase) {
+            console.error('Acquisto non trovato per il film specificato');
+            return throwError('Acquisto non trovato per il film specificato');
+          }
+
+          return this.http.delete(`${environment.JSON_SERVER_BASE_URL}/purchases/${purchase.id}`, { headers });
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Errore durante la restituzione del film:', error);
+          return throwError(error);
+        })
+      );
   }
 }
