@@ -21,6 +21,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 import { MainCarouselComponent } from './components/main-carousel/main-carousel.component';
 
 import { SafeUrlPipe } from './components/movie-details/pipes/safe-url.pipe';
+import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SafeUrlPipe } from './components/movie-details/pipes/safe-url.pipe';
     MovieDetailsComponent,
     MainCarouselComponent,
 
-    SafeUrlPipe
+    SafeUrlPipe,
+      PurchaseListComponent
   ],
   imports: [
     BrowserModule,

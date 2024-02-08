@@ -1,5 +1,5 @@
 div {
-    padding: var(--menuHeight) ;
+    padding: var(--menuHeight) var(--leftRightPadding) ;
 }
 
 iframe {

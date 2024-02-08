@@ -43,7 +43,7 @@ export class AuthService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 
-    return this.http.get<[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`, { headers }).pipe(      
+    return this.http.get<[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`, { headers }).pipe(
       map(purchases => purchases.length > 0)
     );
   }
@@ -113,11 +113,11 @@ export class AuthService {
     this.router.navigate(['/login'], { queryParams: { message: message } });
   }
 
-  returnMovie(movieId: number): Observable<any> {
+  returnMovie(movieId: number) {
     const loggedUser = this.getLoggedUser();
     if (!loggedUser) {
       console.error('Utente non autenticato');
-      return throwError('Utente non autenticato');
+      return throwError(() => new Error('Utente non autenticato'));
     }
 
     const userId = loggedUser.user.id;
@@ -125,24 +125,34 @@ export class AuthService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
 
-    return this.http.get(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`)
+    return this.http.get<Purchase[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}&movieId=${movieId}`, { headers })
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Errore durante il recupero dell\'acquisto:', error);
-          return throwError(error);
-        }),
-        mergeMap((purchase: any) => {
+        catchError((error: HttpErrorResponse) => throwError(() => error)),
+        mergeMap((purchase: Purchase[]) => {
           if (!purchase) {
             console.error('Acquisto non trovato per il film specificato');
-            return throwError('Acquisto non trovato per il film specificato');
+            return throwError(() => new Error('Acquisto non trovato per il film specificato'));
           }
 
-          return this.http.delete(`${environment.JSON_SERVER_BASE_URL}/purchases/${purchase.id}`, { headers });
+          return this.http.delete(`${environment.JSON_SERVER_BASE_URL}/purchases/${purchase[0].id}`, { headers });
         }),
-        catchError((error: HttpErrorResponse) => {
-          console.error('Errore durante la restituzione del film:', error);
-          return throwError(error);
-        })
+        catchError((error: HttpErrorResponse) => throwError(() => error))
       );
+  }
+
+  getPurchases(userId: number): Observable<Purchase[]> {
+    const authToken = this.getAuthToken();
+    if (!authToken) {
+      return throwError(() => new Error('Token di accesso non disponibile'));
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+
+    return this.http.get<Purchase[]>(`${environment.JSON_SERVER_BASE_URL}/purchases?userId=${userId}`, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Errore durante il recupero degli acquisti:', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

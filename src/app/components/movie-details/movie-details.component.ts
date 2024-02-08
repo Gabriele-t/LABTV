@@ -40,7 +40,7 @@ export class MovieDetailsComponent implements OnInit {
         else {
           this.authService.hasPurchasedMovie(loggedUser.user.id, this.movieId).subscribe({
             next: (hasPurchased) => {
-              this.moviePurchased = true;
+              this.moviePurchased = hasPurchased;
             },
             error: error => {
               console.error('Errore durante la verifica dell\'acquisto:', error);
@@ -53,7 +53,9 @@ export class MovieDetailsComponent implements OnInit {
 
   purchaseMovie() {
     this.authService.purchase(this.movieId).subscribe({
-      next: () => { },
+      next: () => {
+        this.moviePurchased = true;
+      },
       error: error => {
         console.error('Errore durante l\'acquisto:', error);
       }
