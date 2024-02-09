@@ -2,13 +2,13 @@ div {
     background-size: cover;
 }
 
-div div {
-    background: linear-gradient(to top, var(--backgroundColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+div > div.gradient_y {
+    background: linear-gradient(to top, var(--backgroundColor), rgba(0, 0, 0, 0) 50%);
 }
 
-div div div {
-    background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
-    padding: var(--menuHeight) var(--leftRightPadding);
+div > div > div.gradient_x {
+    background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0) 50%);
+    padding: var(--menuHeight) var(--leftRightPadding) 0;
     box-sizing: border-box;
     height: 40vw;
 }
@@ -20,10 +20,18 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
+    font-size: 20px;
 }
 
 h1 {
     font-size: 60px;
+}
+
+.gradient_x div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1%;
 }
 
 .material-symbols-outlined {
@@ -38,7 +46,13 @@ h1 {
 }
 
 @media only screen and (max-width: 940px) {
-    div div div {
-        height: 502px;
+    div > div > div.gradient_x {
+        height: 540px;
+    }
+}
+
+@media only screen and (max-width: 1160px) {
+    div > div > div.gradient_x {
+        background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0) 70%);
     }
 }

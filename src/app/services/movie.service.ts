@@ -23,8 +23,8 @@ export class MovieService {
           .set('api_key', this.apiKey)
           .set('language', 'it-IT');
 
-        return this.http.get(`${environment.apiUrl}/movie/popular`, { params: movieParams }).pipe(
-          map((response: any) => {
+        return this.http.get<MovieList>(`${environment.apiUrl}/movie/popular`, { params: movieParams }).pipe(
+          map((response) => {
             const movies = response.results.map((movie: SimpleMovie) => {
               return { ...movie, genre: this.getGenreNames(movie.genre_ids, genreData) };
             });
