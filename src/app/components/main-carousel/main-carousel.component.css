@@ -20,7 +20,6 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
-    font-size: 20px;
 }
 
 h1 {
@@ -31,18 +30,29 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1%;
+    gap: 2%;
 }
 
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+.fa-star {
     background: linear-gradient(to bottom left, var(--primaryColor), var(--secondaryColor));
     background-clip: text;
     color: transparent;
+    font-size: 16px
+}
+
+i {
+    font-size: 4px;
+    color: rgb(255, 255, 255, 0.5);
+}
+
+button {
+    background: linear-gradient(to left bottom, var(--primaryColor), var(--secondaryColor));
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 @media only screen and (max-width: 940px) {

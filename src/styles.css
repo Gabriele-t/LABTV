@@ -1,5 +1,5 @@
 body {
-    --backgroundColor: #151329;
+    --backgroundColor: hsl(245, 37%, 12%);
 
     margin: 0;
     background-color: var(--backgroundColor);

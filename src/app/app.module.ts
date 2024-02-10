@@ -22,6 +22,7 @@ import { MainCarouselComponent } from './components/main-carousel/main-carousel.
 
 import { SafeUrlPipe } from './components/movie-details/pipes/safe-url.pipe';
 import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PurchaseListComponent } from './components/purchase-list/purchase-list.
     MainCarouselComponent,
 
     SafeUrlPipe,
-      PurchaseListComponent
+      PurchaseListComponent,
+      FooterComponent
   ],
   imports: [
     BrowserModule,

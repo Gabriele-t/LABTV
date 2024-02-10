@@ -3,6 +3,7 @@ import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-main-carousel',
@@ -19,11 +20,23 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   };
   private movieListSubscription: Subscription = new Subscription();
 
-  constructor(private movieService: MovieService) {}
+  moviePurchased: boolean = false;
+  loggedUser = this.authService.getLoggedUser();
+
+  constructor(private movieService: MovieService, public authService: AuthService) {}
 
   ngOnInit() {
     this.fetchPopularMovies();
-  }
+
+    // this.authService.hasPurchasedMovie(this.loggedUser!.user.id, this.movieId).subscribe({
+    //   next: (hasPurchased) => {
+    //     this.moviePurchased = hasPurchased;
+    //   },
+    //   error: error => {
+    //     console.error('Errore durante la verifica dell\'acquisto:', error);
+    //   }
+    // });
+}
 
   private fetchPopularMovies() {
     this.movieListSubscription = this.movieService.getPopularMovies(true).subscribe({
@@ -44,5 +57,16 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
     if (this.movieListSubscription) {
       this.movieListSubscription.unsubscribe();
     }
+  }
+
+  purchaseMovie(movieId: number) {
+    this.authService.purchase(movieId).subscribe({
+      next: () => {
+        this.moviePurchased = true;
+      },
+      error: error => {
+        console.error('Errore durante l\'acquisto:', error);
+      }
+    });
   }
 }

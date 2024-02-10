@@ -26,9 +26,17 @@ export class MovieService {
         return this.http.get<MovieList>(`${environment.apiUrl}/movie/popular`, { params: movieParams }).pipe(
           map((response) => {
             const movies = response.results.map((movie: SimpleMovie) => {
-              return { ...movie, genre: this.getGenreNames(movie.genre_ids, genreData) };
+              const roundedVoteAverage = movie.vote_average.toFixed(1);
+              const releaseYear = movie.release_date.split("-")[0];
+            
+              return { 
+                ...movie, 
+                vote_average: parseFloat(roundedVoteAverage),
+                release_date: releaseYear,
+                genre: this.getGenreNames(movie.genre_ids, genreData) 
+              };
             });
-
+                        
             if (slice) {
               return movies.slice(0, 4);
             }

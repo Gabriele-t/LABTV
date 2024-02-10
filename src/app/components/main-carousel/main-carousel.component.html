@@ -6,11 +6,13 @@
                 <p>{{ movie.genre }}</p>
                 <h1>{{ movie.title }}</h1>
                 <div>
-                    <span class="material-symbols-outlined">star</span>
+                    <i class="fa-solid fa-star"></i>
                     <span>{{ movie.vote_average }}</span>
+                    <i class="fa-solid fa-circle"></i>
                     <span>{{ movie.release_date }}</span>
                 </div>
                 <div>{{ movie.overview }}</div>
+                <button (click)="purchaseMovie(movie.id)">Acquista</button>
             </div>
         </div>
     </div>
