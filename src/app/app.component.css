@@ -9,3 +9,7 @@
     color: white;
     font-family: 'Open Sans', sans-serif;
 }
+
+div {
+    min-height: calc(100vh - 30px);
+}

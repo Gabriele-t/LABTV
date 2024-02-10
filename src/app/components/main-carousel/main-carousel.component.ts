@@ -23,20 +23,11 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   moviePurchased: boolean = false;
   loggedUser = this.authService.getLoggedUser();
 
-  constructor(private movieService: MovieService, public authService: AuthService) {}
+  constructor(private movieService: MovieService, public authService: AuthService) { }
 
   ngOnInit() {
     this.fetchPopularMovies();
-
-    // this.authService.hasPurchasedMovie(this.loggedUser!.user.id, this.movieId).subscribe({
-    //   next: (hasPurchased) => {
-    //     this.moviePurchased = hasPurchased;
-    //   },
-    //   error: error => {
-    //     console.error('Errore durante la verifica dell\'acquisto:', error);
-    //   }
-    // });
-}
+  }
 
   private fetchPopularMovies() {
     this.movieListSubscription = this.movieService.getPopularMovies(true).subscribe({
