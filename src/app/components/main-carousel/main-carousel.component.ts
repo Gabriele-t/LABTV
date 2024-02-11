@@ -30,7 +30,7 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   }
 
   private fetchPopularMovies() {
-    this.movieListSubscription = this.movieService.getPopularMovies(true).subscribe({
+    this.movieListSubscription = this.movieService.getPopularMovies(true, 'popular').subscribe({
       next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;

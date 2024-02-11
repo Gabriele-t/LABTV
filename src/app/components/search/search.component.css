@@ -33,12 +33,38 @@ input:hover {
 div {
     position: absolute;
     z-index: 1;
-    background-color: gray;
+    background-color: var(--secondaryBackgroundColor);
     border-radius: 10px;
     margin-top: 10%;
     width: 200%;
     text-wrap: balance;
-    max-height: 80vh;
     overflow-y: auto;
     right: 0;
+    line-height: normal;
+    max-height: 70vh;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    padding: 2% 5%;
+    gap: 4%;
+}
+
+img {
+    width: 30%;
+    border-radius: 5px;
+}
+
+a {
+    color: white;
+    display: inline-block;
+    height: min-content;
 }

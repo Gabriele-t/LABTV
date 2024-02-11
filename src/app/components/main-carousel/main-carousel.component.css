@@ -20,6 +20,7 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
+    max-width: 80%;
 }
 
 h1 {
@@ -45,6 +46,12 @@ i {
     color: rgb(255, 255, 255, 0.5);
 }
 
+.overview {
+    padding-bottom: 1%;
+    color: white;
+    font-weight: 500;
+}
+
 button {
     background: linear-gradient(to left bottom, var(--primaryColor), var(--secondaryColor));
     border: none;
@@ -54,6 +61,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     padding: 1% 2%;
+    display: block;
 }
 
 @media only screen and (max-width: 940px) {

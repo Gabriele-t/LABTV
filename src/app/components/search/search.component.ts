@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -10,6 +11,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class SearchComponent {
   searchResults: SimpleMovie[] = [];
   keyword: string = '';
+  imgSrc = environment.imgSrc;
 
   constructor(private movieService: MovieService, private el: ElementRef) { }
 

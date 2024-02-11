@@ -1,5 +1,5 @@
 p {
-    background-color: hsl(245, 37%, 14%);
+    background-color: var(--secondaryBackgroundColor);
     line-height: 30px;
     margin: 0;
     padding: 0 var(--leftRightPadding);

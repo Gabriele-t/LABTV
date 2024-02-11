@@ -1,5 +1,6 @@
 body {
     --backgroundColor: hsl(245, 37%, 12%);
+    --secondaryBackgroundColor: hsl(245, 37%, 14%);
 
     margin: 0;
     background-color: var(--backgroundColor);

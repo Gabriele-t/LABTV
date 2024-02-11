@@ -2,6 +2,7 @@
 <div *ngIf="searchResults.length > 0">
   <ul>
     <li *ngFor="let movie of searchResults">
+      <img [src]="imgSrc + movie.poster_path" [alt]="movie.title">
       <a [routerLink]="['/movie', movie.id]" (click)="handleMovieClick()">{{ movie.title }}</a>
     </li>
   </ul>
