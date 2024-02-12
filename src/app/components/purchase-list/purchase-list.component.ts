@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Purchase } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-purchase-list',
@@ -10,11 +11,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PurchaseListComponent implements OnInit {
   purchases: Purchase[] = [];
   errorMessage: string = '';
+  imgSrc = environment.imgSrc;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.loadPurchases();
+    this.loadPurchases();    
   }
 
   loadPurchases(): void {
@@ -23,7 +25,7 @@ export class PurchaseListComponent implements OnInit {
       this.authService.getPurchases(loggedUser.user.id)
         .subscribe(
           purchases => {
-            this.purchases = purchases;
+            this.purchases = purchases;            
           },
           error => {
             this.errorMessage = 'Errore durante il caricamento degli acquisti.';

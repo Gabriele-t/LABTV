@@ -1,0 +1,6 @@
+<main>
+    <h1>Film popolari</h1>
+    <div>
+        <img *ngFor="let movie of movieList" [src]="imgSrc + movie.poster_path" [alt]="movie.title" [routerLink]="['/movie', movie.id]">
+    </div>
+</main>

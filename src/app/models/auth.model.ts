@@ -27,5 +27,6 @@ export type LoggedUser = {
 export type Purchase = {
     userId: number,
     movieId: number,
+    poster_path: string,
     id: number
 }

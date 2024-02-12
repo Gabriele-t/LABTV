@@ -57,7 +57,7 @@ export class AuthService {
     return null;
   }
 
-  purchase(movieId: number) {
+  purchase(movieId: number, poster_path: string) {
     const loggedUser = this.getLoggedUser();
 
     if (loggedUser) {
@@ -71,7 +71,7 @@ export class AuthService {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${loggedUser.accessToken}`);
       const userId = loggedUser.user.id;
 
-      const purchaseData = { userId, movieId };
+      const purchaseData = { userId, movieId, poster_path };
 
       return this.http.post(`${environment.JSON_SERVER_BASE_URL}/purchases`, purchaseData, { headers })
         .pipe(

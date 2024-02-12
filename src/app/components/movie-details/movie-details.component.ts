@@ -52,7 +52,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   purchaseMovie() {
-    this.authService.purchase(this.movieId).subscribe({
+    this.authService.purchase(this.movieId, this.movieDetails.poster_path).subscribe({
       next: () => {
         this.moviePurchased = true;
       },

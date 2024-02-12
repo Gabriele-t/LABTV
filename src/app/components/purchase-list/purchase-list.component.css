@@ -1,3 +1,32 @@
 div {
-    padding-top: var(--menuHeight);
+    padding: var(--menuHeight) var(--leftRightPadding) 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1%;
+}
+
+li {
+    width: calc(98% / 3);
+    padding: 1% 0;
+}
+
+img {
+    width: 100%;
+    padding-bottom: 1%;
+}
+
+button {
+    border: none;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(to left bottom, var(--primaryColor), var(--secondaryColor));
+    margin: 0 auto;
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
 }

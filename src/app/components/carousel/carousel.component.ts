@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SimpleMovie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
@@ -18,7 +18,7 @@ export class CarouselComponent {
     infinite: false,
   };
   private movieListSubscription: Subscription = new Subscription();
-  category = ''
+  @Input() category: string = '';
 
   constructor(private movieService: MovieService) {}
 
@@ -27,7 +27,7 @@ export class CarouselComponent {
   }
 
   private fetchMovies() {
-    this.movieListSubscription = this.movieService.getMovies(false, 'popular').subscribe({
+    this.movieListSubscription = this.movieService.getMovies(false, this.category, 1).subscribe({
       next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;

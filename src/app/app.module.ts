@@ -24,6 +24,8 @@ import { SafeUrlPipe } from './components/movie-details/pipes/safe-url.pipe';
 import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { MainCarouselItemComponent } from './components/main-carousel-item/main-carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     SafeUrlPipe,
       PurchaseListComponent,
       FooterComponent,
-      CarouselComponent
+      CarouselComponent,
+      MovieListComponent,
+      MainCarouselItemComponent
   ],
   imports: [
     BrowserModule,

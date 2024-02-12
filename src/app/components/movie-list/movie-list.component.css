@@ -1,0 +1,15 @@
+main {
+    padding: var(--menuHeight) var(--leftRightPadding) 0;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+img {
+    width: 24%;
+    object-fit: cover;
+    padding: 1% 0;
+}

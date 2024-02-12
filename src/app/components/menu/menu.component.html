@@ -6,9 +6,15 @@
 
     <a routerLink=''>Home</a>
     <a routerLink='/purchases'>Acquisti</a>
-    
+
     <div>
         <app-search></app-search>
-        <a routerLink="/login">Accedi</a>
+        <a routerLink="/login">
+            <span *ngIf="loggedUser" class="user">
+                <span class="material-symbols-outlined">person</span>
+                {{ loggedUser.user.name }}
+            </span>
+            <span *ngIf="!loggedUser">Accedi</span>
+        </a>
     </div>
 </mat-toolbar>

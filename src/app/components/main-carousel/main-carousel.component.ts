@@ -30,7 +30,7 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   }
 
   private fetchMovies() {
-    this.movieListSubscription = this.movieService.getMovies(true, 'popular').subscribe({
+    this.movieListSubscription = this.movieService.getMovies(true, 'popular', 1).subscribe({
       next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;
@@ -48,16 +48,5 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
     if (this.movieListSubscription) {
       this.movieListSubscription.unsubscribe();
     }
-  }
-
-  purchaseMovie(movieId: number) {
-    this.authService.purchase(movieId).subscribe({
-      next: () => {
-        this.moviePurchased = true;
-      },
-      error: error => {
-        console.error('Errore durante l\'acquisto:', error);
-      }
-    });
   }
 }

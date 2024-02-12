@@ -12,7 +12,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies(slice: boolean = false, category: string) {
+  getMovies(slice: boolean = false, category: string, page: number) {
     const genreParams = new HttpParams()
       .set('api_key', this.apiKey)
       .set('language', 'it-IT');
@@ -21,6 +21,7 @@ export class MovieService {
       switchMap(genreData => {
         const movieParams = new HttpParams()
           .set('api_key', this.apiKey)
+          .set('page', page)
           .set('language', 'it-IT');
 
         return this.http.get<MovieList>(`${environment.apiUrl}/movie/${category}`, { params: movieParams }).pipe(

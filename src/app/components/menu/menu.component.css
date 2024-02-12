@@ -62,3 +62,7 @@ div:last-child {
     gap: var(--gap);
     justify-content: flex-end;
 }
+
+.user {
+    display: flex;
+}

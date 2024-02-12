@@ -1,0 +1,16 @@
+<div [ngStyle]="{'background-image': 'url(' + imgSrc + movie.backdrop_path + ')'}">
+    <div class="gradient_y">
+        <div class="gradient_x">
+            <p>{{ movie.genre }}</p>
+            <h1>{{ movie.title }}</h1>
+            <div>
+                <i class="fa-solid fa-star"></i>
+                <span>{{ movie.vote_average }}</span>
+                <i class="fa-solid fa-circle"></i>
+                <span>{{ movie.release_date }}</span>
+            </div>
+            <p class="overview">{{ movie.overview }}</p>
+            <button (click)="purchaseMovie(movie.id, movie.poster_path)">Acquista</button>
+        </div>
+    </div>
+</div>
