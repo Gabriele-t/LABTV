@@ -14,7 +14,7 @@ export class CarouselComponent {
   imgSrc = environment.imgSrc;
   slickConfig = {
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     infinite: false,
   };
   private movieListSubscription: Subscription = new Subscription();
@@ -23,11 +23,11 @@ export class CarouselComponent {
   constructor(private movieService: MovieService) {}
 
   ngOnInit() {
-    this.fetchPopularMovies();
+    this.fetchMovies();
   }
 
-  private fetchPopularMovies() {
-    this.movieListSubscription = this.movieService.getPopularMovies(false, 'popular').subscribe({
+  private fetchMovies() {
+    this.movieListSubscription = this.movieService.getMovies(false, 'popular').subscribe({
       next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;

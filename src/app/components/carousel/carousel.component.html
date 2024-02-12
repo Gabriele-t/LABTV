@@ -1,4 +1,7 @@
-<h1>Film popolari</h1>
+<div class="head">
+  <h1>Film popolari</h1>
+  <a>Vedi tutto</a>
+</div>
 <ngx-slick-carousel [config]="slickConfig">
   <div *ngFor="let movie of movieList" ngxSlickItem>
     <img [src]="imgSrc + movie.poster_path" [alt]="movie.title" [routerLink]="['/movie', movie.id]">

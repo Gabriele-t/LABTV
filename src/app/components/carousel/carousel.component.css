@@ -1,6 +1,13 @@
-h1 {
-    margin-left: 2%;
-    margin-right: 2%;
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(var(--leftRightPadding) / 2);
+}
+
+a {
+    cursor: pointer;
+    height: min-content;
 }
 
 ngx-slick-carousel {

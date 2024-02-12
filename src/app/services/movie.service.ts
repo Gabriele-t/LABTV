@@ -12,7 +12,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getPopularMovies(slice: boolean = false, category: string) {
+  getMovies(slice: boolean = false, category: string) {
     const genreParams = new HttpParams()
       .set('api_key', this.apiKey)
       .set('language', 'it-IT');

@@ -26,11 +26,11 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService, public authService: AuthService) { }
 
   ngOnInit() {
-    this.fetchPopularMovies();
+    this.fetchMovies();
   }
 
-  private fetchPopularMovies() {
-    this.movieListSubscription = this.movieService.getPopularMovies(true, 'popular').subscribe({
+  private fetchMovies() {
+    this.movieListSubscription = this.movieService.getMovies(true, 'popular').subscribe({
       next: (movieList) => {
         if (movieList) {
           this.movieList = movieList;
