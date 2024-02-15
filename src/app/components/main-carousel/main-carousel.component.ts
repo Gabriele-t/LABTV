@@ -16,6 +16,8 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
   slickConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,
+    // autoplay: true,
+    autoplaySpeed: 10000,
     infinite: false
   };
   private movieListSubscription: Subscription = new Subscription();

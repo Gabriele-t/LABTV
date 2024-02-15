@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { Observable, catchError, map, mergeMap, of, switchMap, throwError } from 'rxjs';
+import { Observable, Subject, catchError, map, mergeMap, of, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoggedUser, LoginDto, Purchase, RegisterDto } from '../models/auth.model';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  loggedUserChanged = new Subject<LoggedUser | null>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,6 +23,7 @@ export class AuthService {
 
   setLoggedUser(user: LoggedUser) {
     localStorage.setItem('user', JSON.stringify(user))
+    this.loggedUserChanged.next(user);
   }
 
   getLoggedUser(): LoggedUser | null {

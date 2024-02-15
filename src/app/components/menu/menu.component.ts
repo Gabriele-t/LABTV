@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LoggedUser } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,7 +9,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  loggedUser: LoggedUser | null = this.authService.getLoggedUser();
+  loggedUser: LoggedUser | null = null;
+  private authSubscription: Subscription;
 
-  constructor (private authService: AuthService) {}
+  constructor (private authService: AuthService) {
+    this.authSubscription = this.authService.loggedUserChanged.subscribe(user => {
+      this.loggedUser = user;
+    });
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
+  }
 }
