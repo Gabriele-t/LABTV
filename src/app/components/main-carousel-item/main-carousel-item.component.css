@@ -20,7 +20,8 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
-    max-width: 80%;
+    width: 80%;
+    max-width: 600px;
 }
 
 h1 {
