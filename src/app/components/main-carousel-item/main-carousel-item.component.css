@@ -2,15 +2,14 @@ div {
     background-size: cover;
 }
 
-div > div.gradient_y {
+div>div.gradient_y {
     background: linear-gradient(to top, var(--backgroundColor), rgba(0, 0, 0, 0) 50%);
 }
 
-div > div > div.gradient_x {
+div>div>div.gradient_x {
     background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0) 50%);
     padding: var(--menuHeight) var(--leftRightPadding) 0;
     box-sizing: border-box;
-    height: 40vw;
 }
 
 p {
@@ -51,6 +50,11 @@ i {
     padding-bottom: 1%;
     color: white;
     font-weight: 500;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 button {
@@ -66,13 +70,19 @@ button {
 }
 
 @media only screen and (max-width: 940px) {
-    div > div > div.gradient_x {
-        height: 540px;
+    div>div>div.gradient_x {
+        /* height: 540px; */
     }
 }
 
 @media only screen and (max-width: 1160px) {
-    div > div > div.gradient_x {
+    div>div>div.gradient_x {
         background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0) 70%);
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    h1 {
+        max-width: 30%;
     }
 }
