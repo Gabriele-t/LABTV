@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SimpleMovie } from 'src/app/models/movie.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,8 +13,15 @@ export class MainCarouselItemComponent {
   imgSrc = environment.imgSrc;
   moviePurchased: boolean = false;
   @Input() movie: SimpleMovie = new SimpleMovie
+  logoUrl: string = '';
 
-  constructor (private authService: AuthService) {}
+  constructor (private authService: AuthService, private movieService: MovieService) {}
+
+  ngOnInit() {
+    this.movieService.getMovieLogo(this.movie.id).subscribe(logoUrl => {
+      this.logoUrl = this.imgSrc + logoUrl;
+    });
+  }
 
   purchaseMovie(movieId: number, poster_path: string) {
     this.authService.purchase(movieId, poster_path).subscribe({

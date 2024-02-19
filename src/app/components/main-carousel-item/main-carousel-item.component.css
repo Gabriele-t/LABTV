@@ -19,12 +19,10 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
-    width: 80%;
-    max-width: 600px;
 }
 
-h1 {
-    font-size: 60px;
+img {
+    height: 70px;
 }
 
 .gradient_x div {
@@ -47,14 +45,14 @@ i {
 }
 
 .overview {
-    padding-bottom: 1%;
     color: white;
     font-weight: 500;
+    display: -webkit-box;
     -webkit-line-clamp: 3;
-    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
+    width: 80%;
+    max-width: 600px;
 }
 
 button {

@@ -91,4 +91,34 @@ export class MovieService {
       map(response => response.results[0])
     );
   }
+
+  getMovieLogo(movieId: number) {
+    const params = new HttpParams()
+      .set('api_key', this.apiKey)
+      .set('language', 'en');
+
+    const url = `${environment.apiUrl}/movie/${movieId}/images`;
+
+    return this.http.get<any>(url, { params }).pipe(
+      map(response => {
+        console.log(response);
+        
+        const logos = response.logos;
+        if (logos && logos.length > 0) {
+          return logos[0].file_path;
+        }
+        return this.http.get<any>(url, { params: params.delete('language') }).pipe(
+          map(response => {
+            const logos = response.logos;
+            if (logos && logos.length > 0) {
+              console.log(params);
+              
+              return logos[0].file_path;
+            }
+            return null;
+          })
+        );
+      })
+    );
+  }
 }
