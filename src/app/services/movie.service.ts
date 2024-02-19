@@ -100,9 +100,7 @@ export class MovieService {
     const url = `${environment.apiUrl}/movie/${movieId}/images`;
 
     return this.http.get<any>(url, { params }).pipe(
-      map(response => {
-        console.log(response);
-        
+      map(response => {        
         const logos = response.logos;
         if (logos && logos.length > 0) {
           return logos[0].file_path;
