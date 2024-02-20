@@ -113,7 +113,7 @@ export class MovieService {
           return of(firstLogoFilePath);
         }
 
-        return this.http.get<any>(url, { params: params.delete('language') }).pipe(
+        return this.http.get<any>(url, { params: params.set('language', 'en') }).pipe(
           map(response => {
             const logos = response.logos;
             if (logos && logos.length > 0) {
