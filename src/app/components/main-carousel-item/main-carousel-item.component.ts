@@ -19,6 +19,8 @@ export class MainCarouselItemComponent {
 
   ngOnInit() {
     this.movieService.getMovieLogo(this.movie.id).subscribe(logoUrl => {
+      console.log(logoUrl);
+      
       this.logoUrl = this.imgSrc + logoUrl;
     });
   }

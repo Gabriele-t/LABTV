@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DetailedMovie, MovieList, SimpleMovie, VideoResponse } from '../models/movie.model';
 import { environment } from 'src/environments/environment';
-import { map, switchMap } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +29,15 @@ export class MovieService {
             const movies = response.results.map((movie: SimpleMovie) => {
               const roundedVoteAverage = movie.vote_average.toFixed(1);
               const releaseYear = movie.release_date.split("-")[0];
-            
-              return { 
-                ...movie, 
+
+              return {
+                ...movie,
                 vote_average: parseFloat(roundedVoteAverage),
                 release_date: releaseYear,
-                genre: this.getGenreNames(movie.genre_ids, genreData) 
+                genre: this.getGenreNames(movie.genre_ids, genreData)
               };
             });
-                        
+
             if (slice) {
               return movies.slice(0, 4);
             }
@@ -95,24 +95,31 @@ export class MovieService {
   getMovieLogo(movieId: number) {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
-      .set('language', 'en');
+      .set('language', 'it');
 
     const url = `${environment.apiUrl}/movie/${movieId}/images`;
 
     return this.http.get<any>(url, { params }).pipe(
-      map(response => {        
+      map(response => {
         const logos = response.logos;
         if (logos && logos.length > 0) {
           return logos[0].file_path;
         }
+
+        return null;
+      }),
+      switchMap(firstLogoFilePath => {
+        if (firstLogoFilePath !== null) {
+          return of(firstLogoFilePath);
+        }
+
         return this.http.get<any>(url, { params: params.delete('language') }).pipe(
           map(response => {
             const logos = response.logos;
             if (logos && logos.length > 0) {
-              console.log(params);
-              
               return logos[0].file_path;
             }
+
             return null;
           })
         );
