@@ -10,6 +10,9 @@ div>div>div.gradient_x {
     background: linear-gradient(to right, var(--backgroundColor), rgba(0, 0, 0, 0) 50%);
     padding: var(--menuHeight) var(--leftRightPadding) 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
 }
 
 p {
@@ -19,17 +22,20 @@ p {
     background-clip: text;
     color: transparent;
     font-weight: 1000;
+    max-width: fit-content;
+    margin: 0;
 }
 
 img {
     height: 70px;
+    max-width: max-content;
 }
 
 .gradient_x div {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 2%;
+    gap: 10px;
 }
 
 .fa-star {
@@ -65,12 +71,7 @@ button {
     font-size: 16px;
     padding: 1% 2%;
     display: block;
-}
-
-@media only screen and (max-width: 940px) {
-    div>div>div.gradient_x {
-        /* height: 540px; */
-    }
+    max-width: fit-content;
 }
 
 @media only screen and (max-width: 1160px) {
