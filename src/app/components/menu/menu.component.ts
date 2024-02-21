@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoggedUser } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +16,11 @@ export class MenuComponent {
     this.authSubscription = this.authService.loggedUserChanged.subscribe(user => {
       this.loggedUser = user;
     });
+    this.loggedUser = this.authService.getLoggedUser()
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
   ngOnDestroy() {

@@ -9,12 +9,17 @@
 
     <div>
         <app-search></app-search>
-        <a routerLink="/login">
+        <!-- <a routerLink="/login">
             <span *ngIf="loggedUser" class="user">
                 <span class="material-symbols-outlined">person</span>
                 {{ loggedUser.user.name }}
             </span>
             <span *ngIf="!loggedUser">Accedi</span>
+        </a> -->
+        <a *ngIf="!loggedUser" routerLink="/login">Accedi</a>
+        <a *ngIf="loggedUser" routerLink="/login" class="user" (click)="logout()">
+            <span class="material-symbols-outlined">person</span>
+            {{ loggedUser.user.name[0] }} (Esci)
         </a>
     </div>
 </mat-toolbar>

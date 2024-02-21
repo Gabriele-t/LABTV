@@ -37,6 +37,11 @@ export class AuthService {
     return null
   }
 
+  logout() {
+    localStorage.removeItem('user')
+    this.loggedUserChanged.next(null);
+  }
+
   hasPurchasedMovie(userId: number, movieId: number): Observable<boolean> {
     const authToken = this.getAuthToken();
     if (!authToken) {
